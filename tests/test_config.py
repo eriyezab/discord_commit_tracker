@@ -2,7 +2,6 @@ import pytest
 
 from discord_commit_tracker.config import Config, ConfigError
 
-
 REQUIRED_VARS = {
     "DISCORD_TOKEN": "test-token",
     "DISCORD_CHANNEL_ID": "111",
