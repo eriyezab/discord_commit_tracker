@@ -30,7 +30,7 @@ jobs:
         run: ruff format --check .
 
       - name: Type check (mypy)
-        run: mypy .
+        run: mypy discord_commit_tracker
 
       - name: Tests (pytest)
         run: pytest
