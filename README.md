@@ -4,7 +4,7 @@ A Discord bot that automatically posts to a designated channel whenever someone 
 
 Originally built to track progress on [100 Days of SwiftUI](https://www.hackingwithswift.com/100/), but works with any GitHub repo.
 
-> **Note:** This bot is designed for a single Discord server. Multi-server support is planned for a future release.
+> **Note:** This is a self-hosted bot. You must host the code yourself and create your own bot in the Discord Developer Portal to use it. A publicly hosted version that anyone can add to their server without any setup is planned for a future release.
 
 ## How It Works
 
@@ -104,4 +104,4 @@ These are out of scope for v1 but planned for future releases:
 - **Weekly digest** — a scheduled weekly summary of activity across all tracked repos, including commit counts and a leaderboard.
 - **PR and issue notifications** — extend beyond push events to notify when a pull request is opened/merged or an issue is opened/closed.
 - **Per-repo mute/unmute** — temporarily silence a repo without removing the webhook.
-- **Multi-server support** — run a single bot instance across multiple Discord servers.
+- **Public hosted version** — a centrally managed cloud instance that anyone can add to their Discord server without needing to host anything or create their own bot.
