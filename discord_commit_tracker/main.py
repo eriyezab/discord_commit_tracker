@@ -20,9 +20,7 @@ async def main() -> None:
 
     bot = create_bot(config)
 
-    server = uvicorn.Server(
-        uvicorn.Config(app, host="0.0.0.0", port=config.port, log_level="info")
-    )
+    server = uvicorn.Server(uvicorn.Config(app, host="0.0.0.0", port=config.port, log_level="info"))
 
     await asyncio.gather(
         bot.start(config.discord_token),
