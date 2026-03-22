@@ -4,6 +4,25 @@ This plan breaks the v1 MVP into discrete, shippable milestones. Each milestone 
 
 ---
 
+## Milestone 0: Discord Bot Setup
+
+**Goal:** A registered Discord bot that is invited to your server and ready to connect.
+
+- [ ] Go to the [Discord Developer Portal](https://discord.com/developers/applications) and click **New Application**. Give it a name (e.g. "Commit Tracker").
+- [ ] In the left sidebar, go to **Bot** and click **Add Bot**. Confirm.
+- [ ] Under the Bot page, click **Reset Token** and copy the token — this is your `DISCORD_TOKEN`. Store it somewhere safe (you won't be able to see it again without resetting).
+- [ ] On the same Bot page, scroll down to **Privileged Gateway Intents** and enable **Server Members Intent** and **Message Content Intent** (needed for discord.py to function correctly).
+- [ ] In the left sidebar, go to **OAuth2 → URL Generator**.
+  - Under **Scopes**, check `bot` and `applications.commands` (needed for slash commands).
+  - Under **Bot Permissions**, check: `Send Messages`, `Embed Links`, `Read Message History`.
+  - Copy the generated URL and open it in your browser to invite the bot to your server.
+- [ ] In Discord, go to your server's **Settings → Roles** and confirm the bot has a role with the permissions above.
+- [ ] In Discord, right-click your server name → **Copy Server ID** — this is your `DISCORD_GUILD_ID`. (You may need to enable Developer Mode first: User Settings → Advanced → Developer Mode.)
+- [ ] Right-click the channel you want the bot to post to → **Copy Channel ID** — this is your `DISCORD_CHANNEL_ID`.
+- [ ] Save `DISCORD_TOKEN`, `DISCORD_GUILD_ID`, and `DISCORD_CHANNEL_ID` in a local `.env` file for use in development.
+
+---
+
 ## Milestone 1: Project Scaffold
 
 **Goal:** Runnable skeleton with both the Discord bot and FastAPI server starting up together.
