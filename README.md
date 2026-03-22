@@ -1,8 +1,10 @@
 # Discord Commit Tracker
 
-A Discord bot that automatically posts to a designated channel whenever someone pushes a commit to a tracked GitHub repository. Designed for passive sharing — small groups can see what others are working on without anyone needing to remember to post.
+A Discord bot that automatically posts to a designated channel whenever someone pushes a commit to a tracked GitHub repository. Designed for passive sharing — a small friend group can see what others are working on without anyone needing to remember to post.
 
 Originally built to track progress on [100 Days of SwiftUI](https://www.hackingwithswift.com/100/), but works with any GitHub repo.
+
+> **Note:** This bot is designed for a single Discord server. Multi-server support is planned for a future release.
 
 ## How It Works
 
@@ -91,3 +93,15 @@ ngrok http 3000
 ```
 
 Set `WEBHOOK_BASE_URL` to your ngrok URL, then add a webhook to a test repo in GitHub and push a commit to verify the flow.
+
+## Future Features
+
+These are out of scope for v1 but planned for future releases:
+
+- **GitHub-to-Discord user mapping** — link GitHub usernames to Discord users so commit embeds mention the right person via `/link` and `/unlink` commands.
+- **LeetCode submission tracking** — poll LeetCode for accepted submissions and post them to the same channel as commits.
+- **Streak tracking** — track consecutive days of commits and post milestone notifications (e.g. 7-day, 30-day streaks). Especially useful for challenge-based projects like 100 Days of SwiftUI.
+- **Weekly digest** — a scheduled weekly summary of activity across all tracked repos, including commit counts and a leaderboard.
+- **PR and issue notifications** — extend beyond push events to notify when a pull request is opened/merged or an issue is opened/closed.
+- **Per-repo mute/unmute** — temporarily silence a repo without removing the webhook.
+- **Multi-server support** — run a single bot instance across multiple Discord servers.
