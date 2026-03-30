@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands
 
 from discord_commit_tracker.config import Config
+from discord_commit_tracker.server import app
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +25,7 @@ class CodeTrackerBot(commands.Bot):
 
         channel = self.get_channel(int(self.config.discord_channel_id))
         if isinstance(channel, discord.TextChannel):
+            app.state.channel = channel
             await channel.send("✅ Online — tracking 0 repos")
         else:
             logger.warning("Could not find channel %s", self.config.discord_channel_id)
