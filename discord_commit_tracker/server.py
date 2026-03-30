@@ -18,14 +18,20 @@ async def health() -> dict[str, str]:
 async def github_webhook(request: Request) -> dict[str, str]:
     payload = await request.json()
 
+    repo = payload.get("repository", {})
+    repo_name = repo.get("full_name", "unknown")
     commits = payload.get("commits", [])
+
+    logger.info("Received webhook for %s (%d commit(s))", repo_name, len(commits))
+
     if not commits:
+        logger.info("No commits in payload for %s — ignoring", repo_name)
         return {"status": "ignored"}
 
-    repo = payload["repository"]
     channel = request.app.state.channel
 
     for commit in commits:
+        logger.info("Posting embed for commit %s by %s", commit["id"], commit["author"]["name"])
         embed = build_commit_embed(
             author=commit["author"]["name"],
             message=commit["message"],
