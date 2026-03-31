@@ -2,36 +2,45 @@ from datetime import datetime
 
 import discord
 
-_TITLE_MAX = 80
+_MSG_MAX = 72
 
 
-def build_commit_embed(
+def build_push_embed(
     *,
-    author: str,
-    message: str,
     repo_full_name: str,
     repo_url: str,
-    commit_url: str,
-    timestamp: str,
+    compare_url: str,
+    branch: str,
+    commits: list[dict],
+    latest_timestamp: str,
     private: bool,
 ) -> discord.Embed:
-    first_line = message.splitlines()[0]
-    title = first_line if len(first_line) <= _TITLE_MAX else first_line[:77] + "..."
+    count = len(commits)
+    title = f"{count} commit{'s' if count != 1 else ''} to {repo_full_name}"
+
+    lines = []
+    for commit in commits:
+        short_sha = commit["id"][:7]
+        first_line = commit["message"].splitlines()[0]
+        msg = first_line if len(first_line) <= _MSG_MAX else first_line[:69] + "..."
+        author = commit["author"]["name"]
+        lines.append(f"• `{short_sha}` {msg} — {author}")
 
     embed = discord.Embed(
         title=title,
-        url=commit_url,
-        timestamp=datetime.fromisoformat(timestamp.replace("Z", "+00:00")),
+        url=compare_url,
+        description="\n".join(lines),
+        timestamp=datetime.fromisoformat(latest_timestamp.replace("Z", "+00:00")),
         color=discord.Color.blurple(),
     )
-    embed.set_author(name=author)
+    embed.add_field(name="Branch", value=branch, inline=True)
     embed.add_field(
         name="Repository",
         value=f"[{repo_full_name}]({repo_url})",
-        inline=False,
+        inline=True,
     )
 
     if private:
-        embed.set_footer(text="🔒 Private repo — link may not be accessible.")
+        embed.set_footer(text="🔒 Private repo — links may not be accessible.")
 
     return embed
