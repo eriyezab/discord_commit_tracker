@@ -23,6 +23,8 @@ async def main() -> None:
     await db.init()
     logger.info("Database ready at %s", config.database_path)
 
+    app.state.db = db
+
     bot = create_bot(config, db)
 
     server = uvicorn.Server(uvicorn.Config(app, host="0.0.0.0", port=config.port, log_level="info"))
