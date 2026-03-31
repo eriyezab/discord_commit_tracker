@@ -1,0 +1,22 @@
+{
+  "ref": "refs/heads/main",
+  "compare": "https://github.com/octocat/hello-world/compare/abc123...def456",
+  "commits": [
+    {
+      "id": "def456",
+      "message": "Add README",
+      "url": "https://github.com/octocat/hello-world/commit/def456",
+      "author": {
+        "name": "Monalisa Octocat",
+        "email": "monalisa@octocat.com"
+      },
+      "timestamp": "2024-01-15T12:00:00Z"
+    }
+  ],
+  "repository": {
+    "full_name": "octocat/hello-world",
+    "html_url": "https://github.com/octocat/hello-world",
+    "default_branch": "main",
+    "private": false
+  }
+}
