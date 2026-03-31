@@ -99,8 +99,7 @@ This plan breaks the v1 MVP into discrete, shippable milestones. Each milestone 
 
 - [ ] Skip non-push events: check `X-GitHub-Event` header, return `200 OK` and ignore if not `push`
 - [ ] Skip pushes to non-default branches: compare `ref` against `repository.default_branch`
-- [ ] Handle multi-commit pushes: post one embed per commit
-- [ ] Cap at 5 embeds per push: if more than 5 commits, post the 5 most recent and append a "and N more — see full comparison" note linking to the `compare` URL
+- [ ] Handle multi-commit pushes: post a single consolidated embed per push listing all commits
 - [ ] Add private repo flag: if `repository.private` is `true`, add a footer note to the embed
 
 ---

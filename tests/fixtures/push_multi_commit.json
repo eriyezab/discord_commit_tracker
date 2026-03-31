@@ -1,0 +1,33 @@
+{
+  "ref": "refs/heads/main",
+  "compare": "https://github.com/octocat/hello-world/compare/abc123...ghi789",
+  "commits": [
+    {
+      "id": "abc123",
+      "message": "First commit",
+      "url": "https://github.com/octocat/hello-world/commit/abc123",
+      "author": { "name": "Alice" },
+      "timestamp": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "def456",
+      "message": "Second commit",
+      "url": "https://github.com/octocat/hello-world/commit/def456",
+      "author": { "name": "Bob" },
+      "timestamp": "2024-01-15T11:00:00Z"
+    },
+    {
+      "id": "ghi789",
+      "message": "Third commit",
+      "url": "https://github.com/octocat/hello-world/commit/ghi789",
+      "author": { "name": "Alice" },
+      "timestamp": "2024-01-15T12:00:00Z"
+    }
+  ],
+  "repository": {
+    "full_name": "octocat/hello-world",
+    "html_url": "https://github.com/octocat/hello-world",
+    "default_branch": "main",
+    "private": false
+  }
+}

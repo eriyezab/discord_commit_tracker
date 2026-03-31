@@ -137,7 +137,7 @@ The bot posts to a single hardcoded channel (configured via environment variable
 8. Filter: only process pushes to the repository's default branch. Compare `ref` in the payload against `repository.default_branch`. Ignore pushes to other branches.
 9. Store the `X-GitHub-Delivery` ID in the `webhook_deliveries` table.
 10. Check the global `paused` flag in the `bot_state` table. If paused, log the event to stdout and respond `200 OK` without posting to Discord.
-11. For each commit in the `commits` array, post a Discord embed to the configured channel.
+11. Post a single consolidated Discord embed to the configured channel summarizing all commits in the push.
 
 ### Health Check
 
@@ -145,16 +145,13 @@ The bot posts to a single hardcoded channel (configured via environment variable
 
 ## Discord Embed Format
 
-For each commit, post an embed with:
+Post one embed per push (not per commit) with:
 
-- **Author**: The commit author's name from the payload.
-- **Title**: The commit message (first line only, truncated to 80 characters if longer).
-- **Repository**: `repository.full_name`, linked to the repo URL.
-- **Diff link**: Link to the commit URL (`commit.url`).
-- **Private repo handling**: If `repository.private` is `true`, append a note to the embed footer: "🔒 Private repo — link may not be accessible."
-- **Timestamp**: The commit timestamp.
-
-If a single push contains multiple commits, send one embed per commit. If a push contains more than 5 commits, post the 5 most recent and add a note: "and N more commits — see full push comparison" with a link to the `compare` URL from the payload.
+- **Title**: `N commit(s) to owner/repo`, linked to the `compare` URL from the payload.
+- **Commit list**: Each commit on its own line — `• {short sha} {first line of message, truncated to 72 chars} — {author name}`.
+- **Branch**: The branch that was pushed to (derived from `ref`, e.g. `refs/heads/main` → `main`).
+- **Private repo handling**: If `repository.private` is `true`, append a note to the embed footer: "🔒 Private repo — links may not be accessible."
+- **Timestamp**: The timestamp of the most recent commit in the push.
 
 ## Security
 
@@ -247,7 +244,7 @@ If a single push contains multiple commits, send one embed per commit. If a push
 - Push to default branch — processed.
 - Push to non-default branch — ignored.
 - Push with empty `commits` array (branch creation/deletion) — ignored, no embed produced.
-- Push with more than 5 commits — only the 5 most recent are returned, with a "and N more" note.
+- Push with multiple commits — all commits are included in a single consolidated embed.
 - Private repo — flagged correctly in the parsed output.
 - Force push — processed normally.
 
